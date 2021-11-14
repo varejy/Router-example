@@ -1,0 +1,4 @@
+public/
+src/**/*.{test.tsx, spec.tsx}
+*.yml
+*.md
