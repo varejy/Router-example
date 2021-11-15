@@ -12,5 +12,5 @@ open `http://localhost:3000/`
 #### [App.tsx](https://github.com/bugaro/Router-example/blob/master/src/App.tsx)
 #### [outlet.tsx](https://github.com/bugaro/Router-example/blob/master/src/router/outlet.tsx)
 
-## How it works!
-![](router.drawio.pdf)
+ 
+## [How it works!](https://github.com/bugaro/Router-example/blob/master/src/router/router.drawio.pdf)
