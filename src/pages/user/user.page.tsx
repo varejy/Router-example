@@ -7,7 +7,7 @@ const User: FC<{ user: UserType }> = ({ user }) => {
   return (
     <PageLayout title="User">
       <Panel shaded bordered bodyFill style={{ display: 'inline-block', width: 240 }}>
-        <img src={user.avatar} height="240" />
+        <img alt="" src={user.avatar} height="240" />
         <Panel header={`${user.first_name} ${user.last_name}`}>
           <p>{user.email}</p>
         </Panel>
