@@ -1,4 +1,4 @@
-import { AppRoutes, AppState } from '@router/routes';
+import { AppRoutes, AppState } from 'src/routes';
 import { DoneFn, State } from 'router5/dist/types/base';
 
 export const componentMiddleware =

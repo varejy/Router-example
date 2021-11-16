@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { useRoute } from 'react-router5';
 import styled, { css, keyframes } from 'styled-components';
 import { viewTransitionService } from './plugins/view-transition/viewTransition.service';
-import { AppState } from './routes';
+import { AppState } from '../routes';
 
 const blurViewForwards = keyframes`
 0%

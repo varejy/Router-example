@@ -1,4 +1,4 @@
-import { AppRoutes, AppState } from '@router/routes';
+import { AppRoutes, AppState } from 'src/routes';
 import { State } from 'router5';
 import { DoneFn } from 'router5/dist/types/base';
 import { catchError, EMPTY, forkJoin, take } from 'rxjs';
