@@ -8,7 +8,7 @@ export const NavItem: FC<{ routeName: string; as: React.ElementType; children: a
 ) => {
   const { route } = useRoute();
   return (
-    <Nav.Item routeName={routeName} active={routeName === route.name} as={as} {...rest}>
+    <Nav.Item routeName={routeName} active={routeName === route?.name} as={as} {...rest}>
       <span>{children}</span>
     </Nav.Item>
   );
