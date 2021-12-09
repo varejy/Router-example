@@ -1,7 +1,7 @@
-import { Outlet } from '@router/outlet';
+import { Outlet } from '@router/@types/outlet.type';
 import { FC, useEffect } from 'react';
 
-const One: FC = () => {
+const One: FC<Outlet> = ({ Outlet }) => {
   useEffect(() => {}, []);
   return (
     <>
