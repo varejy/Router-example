@@ -1,4 +1,4 @@
-import { EventData } from '@router/@types/routeDataResolver.type';
+import { EventData, ViewData } from '@router/@types/routeDataResolver.type';
 import React, { FC } from 'react';
 import { BehaviorSubject, first, Observable } from 'rxjs';
 
@@ -21,24 +21,23 @@ class ComponentViewResolver {
 
     while (len--) {
       const item = data![len];
-      view = this.resolveView(item.component, item.data, view, len);
+      view = this.resolveView(item, view, len);
     }
     return view!;
   }
 
   private resolveView(
-    component: FC,
-    props: Record<string, any>,
+    item: ViewData,
     view: React.ReactElement<any, any> | undefined,
     idx: number
   ): React.ReactElement<any, any> {
     if (!view) {
-      return React.createElement(component, { ...props, Outlet: () => null } as Record<string, any>, []);
+      return React.createElement(item.component, { ...item.data, Outlet: () => null } as Record<string, any>, []);
     }
 
     return React.createElement(
-      component,
-      { ...props, Outlet: () => React.createElement(() => view, { key: `__outlet__${idx}` }, []) } as Record<
+      item.component,
+      { ...item.data, Outlet: () => React.createElement(() => view, { key: `__outlet__${idx}` }, []) } as Record<
         string,
         any
       >,
