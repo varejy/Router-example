@@ -15,7 +15,7 @@ class ComponentViewResolver {
   }
   private getView(data: EventData['data']): FC<any> {
     const components = data!.map((view) => {
-      return view.component(view.data);
+      return <view.component {...view.data}></view.component>; // TODO: Hot fix hooks
     });
     return this.resolveView(components);
   }
