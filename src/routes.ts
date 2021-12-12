@@ -1,6 +1,6 @@
 import { AppRoutes } from '@router/@types/routes.type';
 import { userService } from '@services/user/user.service';
-import { of } from 'rxjs';
+// import { of } from 'rxjs';
 
 export const routes: AppRoutes = [
   {
@@ -27,6 +27,11 @@ export const routes: AppRoutes = [
     name: 'one',
     path: '/one',
     component: () => import('@pages/dolls/one.page'),
+    resolve: () => {
+      return {
+        user: userService.getUserById(1),
+      };
+    },
   },
   {
     name: 'one.second',
@@ -34,7 +39,7 @@ export const routes: AppRoutes = [
     component: () => import('@pages/dolls/second.page'),
     resolve: () => {
       return {
-        data: of('Hi from resolver'),
+        user: userService.getUserById(2),
       };
     },
   },
@@ -42,5 +47,10 @@ export const routes: AppRoutes = [
     name: 'one.second.third',
     path: '/third',
     component: () => import('@pages/dolls/third.page'),
+    resolve: () => {
+      return {
+        user: userService.getUserById(3),
+      };
+    },
   },
 ];

@@ -4,12 +4,14 @@ import { AppRoutes, AppState } from '@router/@types/routes.type';
 import { DoneFn, State } from 'router5/dist/types/base';
 import { EMPTY, switchMap } from 'rxjs';
 import { componentViewResolver } from './componentViewResolver.service';
+import { dataResolverCacheService } from './dataResolverCache.service';
 import { routeDataResolver } from './routeDataResolver.service';
 
 export const viewMiddleware =
   (routes: AppRoutes) =>
   () =>
   (toState: State, _fromState: State, done: DoneFn): void => {
+    dataResolverCacheService.setRouteName(toState.name);
     routeDataResolver
       .resolve(routes, toState)
       .pipe(

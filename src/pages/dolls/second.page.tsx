@@ -1,15 +1,13 @@
 import { Outlet } from '@router/@types/outlet.type';
+import { User } from '@services/user/user.service';
 import { FC } from 'react';
 
-interface Props extends Outlet {
-  data: string;
-}
-const Second: FC<Props> = ({ Outlet, data }) => {
+const Second: FC<Outlet & { user: User }> = ({ Outlet, user }) => {
   return (
     <>
-      <div>second</div>
+      <div>Email: {user.email}</div>
+
       <div>
-        <div>{data}</div>
         <div>
           <Outlet />
         </div>

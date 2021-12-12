@@ -32,15 +32,20 @@ class ComponentViewResolver {
     idx: number
   ): React.ReactElement<any, any> {
     if (!view) {
-      return React.createElement(item.component, { ...item.data, Outlet: () => null } as Record<string, any>, []);
+      return React.createElement(
+        item.component,
+        { ...item.data, Outlet: () => null, key: idx } as Record<string, any>,
+        []
+      );
     }
 
     return React.createElement(
       item.component,
-      { ...item.data, Outlet: () => React.createElement(() => view, { key: `__outlet__${idx}` }, []) } as Record<
-        string,
-        any
-      >,
+      {
+        ...item.data,
+        Outlet: () => React.createElement(() => view, { key: `__outlet__${idx}` }, []),
+        key: idx,
+      } as Record<string, any>,
       []
     );
   }

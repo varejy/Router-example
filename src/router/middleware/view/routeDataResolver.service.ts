@@ -2,6 +2,7 @@ import { EventData, MapRoutesData, RouterDataResolverEvents as RDRE } from '@rou
 import { AppRoutes } from '@router/@types/routes.type';
 import { State } from 'router5';
 import { catchError, combineLatestWith, first, forkJoin, map, mergeWith, Observable, of, Subject, zip } from 'rxjs';
+import { dataResolverCacheService } from './dataResolverCache.service';
 
 class RouteDataResolver {
   resolve(routes: AppRoutes, state: State): Observable<EventData> {
@@ -24,6 +25,7 @@ class RouteDataResolver {
       return zip(components).pipe(
         combineLatestWith(zip(data)),
         map(([_components, _data]) => {
+          dataResolverCacheService.cacheResolvedData(_data);
           return this.streamEvent(
             RDRE.resolved,
             _components.map((module, idx) => {
@@ -63,12 +65,17 @@ class RouteDataResolver {
   private mapRoutesData(routes: AppRoutes, state: State): MapRoutesData {
     const components: MapRoutesData['components'] = [];
     const data: MapRoutesData['data'] = [];
+    const cachedData = dataResolverCacheService.getDataForState();
+    const cachedDataLen = cachedData.length;
 
     for (let i = 0, len = routes.length; i < len; i++) {
       components.push(routes[i].component());
+      if (cachedDataLen > 0 && i < cachedDataLen) {
+        data.push(forkJoin(cachedData[i]));
+        continue;
+      }
       const fn = routes[i].resolve;
       const resolve = fn ? fn(state.params) : { __EMPTY__: of(undefined) };
-
       data.push(forkJoin(resolve));
     }
     return { components, data };
